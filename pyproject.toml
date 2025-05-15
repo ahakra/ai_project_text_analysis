@@ -1,0 +1,23 @@
+[project]
+authors = [
+  {name = "Ahmad Akra", email = "ahakra@outlook.com"},
+]
+dependencies = [
+  "transformers (>=4.51.3,<5.0.0)",
+  "grpcio (>=1.71.0,<2.0.0)",
+  "grpcio-tools (>=1.71.0,<2.0.0)",
+  "torch (>=2.7.0,<3.0.0)",
+  "torchvision (>=0.22.0,<0.23.0)",
+  "torchaudio (>=2.7.0,<3.0.0)",
+  "bson (>=0.5.10,<0.6.0)",
+  "pymongo (>=4.13.0,<5.0.0)",
+]
+description = ""
+name = "ai-project-text-analysis"
+readme = "README.md"
+requires-python = ">=3.13"
+version = "0.1.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=2.0.0,<3.0.0"]
