@@ -33,22 +33,35 @@ class ServiceRegistryClient:
             print(f"Error occurred: {e}")
 
     def update_service(self, service_info):
-        #request = service__registry__pb2.ServiceUpdateRequest(**service_info)
+        metadata = {k: str(v) for k, v in service_info["metadata"].items()}
+        request = service__registry__pb2.ServiceUpdateRequest(
+            service_id=service_info["service_id"],
+            category=service_info["category"],
+            subcategory=service_info["subcategory"],
+            status=service_info["status"],
+            version=service_info["version"],
+            health_endpoint=service_info.get("health_endpoint", ""),
+            metadata=metadata
+        )
         try:
-            response = self.stub.UpdateService(service_info)
+            response = self.stub.UpdateService(request)
             print(f"Service Updated: {response}")
         except grpc.RpcError as e:
             print(f"Error occurred: {e}")
 
     def delete_service(self, service_info):
-        #request = service__registry__pb2.ServiceDeleteRequest(service_id=service_id)
+        request = service__registry__pb2.ServiceDeleteRequest(
+            service_id=service_info["service_id"],
+            category=service_info["category"],
+            subcategory=service_info.get("subcategory", "")
+        )
         try:
-            response = self.stub.DeleteService(service_info)
+            response = self.stub.DeleteService(request)
             print(f"Service Deleted: {response}")
         except grpc.RpcError as e:
-            print(f"Error occurred: {e}")    
+            print(f"Error occurred: {e}")
 
-    def update_metadata(service_info, new_metadata):
+def update_metadata(service_info, new_metadata):
         updated_service_info = service_info.copy() 
         updated_service_info["metadata"] = new_metadata
         return updated_service_info
