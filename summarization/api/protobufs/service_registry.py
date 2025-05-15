@@ -13,6 +13,7 @@ class ServiceRegistryClient:
         self.stub = service__registry__pb2_grpc.ServiceRegistryStub(self.channel)
 
 
+
     def register_service(self, service_info):
         metadata = {k: str(v) for k, v in service_info["metadata"].items()}
         request = service__registry__pb2.ServiceRegisterRequest(
@@ -26,6 +27,9 @@ class ServiceRegistryClient:
             status=service_info["status"],
             metadata=metadata
         )
+        # Add debug prints here
+        print(f"Attempting to call RegisterService on {self.stub}")
+        print(f"With request: {request}")
         try:
             response = self.stub.RegisterService(request)
             print(f"Service Registered: {response}")
