@@ -11,7 +11,7 @@ SERVICE_UPDATE_INFO = {
     "subcategory": "text_analysis",
     "status": "active",
     "version": "v1.0",
-    "metadata": {"key": "static_value"}  
+    "metadata": {"key": "static_value"}
 }
 
 SERVICE_REGISTER_INFO = {
@@ -23,5 +23,8 @@ SERVICE_REGISTER_INFO = {
     "task": "summarize",
     "version": "v1.0",
     "status": "active",
-    "metadata": {"last_updated": str(current_timestamp)}
+    "metadata": {
+        "last_updated": str(current_timestamp),
+        "NATS":"text_summarization"
+    }
 }

@@ -1,12 +1,14 @@
 from concurrent import futures
 import grpc
 import time
-from . import service_registry_pb2 as service__registry__pb2
-from . import service_registry_pb2_grpc as service__registry__pb2_grpc
+
+from protobufs import service_registry_pb2 as service__registry__pb2
+from protobufs import service_registry_pb2_grpc as service__registry__pb2_grpc
+from datetime import datetime
 
 
 class ServiceRegistryClient:
-    
+
     def __init__(self, host="localhost", port=50051):
         # Now accepts host and port as arguments
         self.channel = grpc.insecure_channel(f"{host}:{port}")
@@ -64,9 +66,3 @@ class ServiceRegistryClient:
             print(f"Service Deleted: {response}")
         except grpc.RpcError as e:
             print(f"Error occurred: {e}")
-
-def update_metadata(service_info, new_metadata):
-        updated_service_info = service_info.copy() 
-        updated_service_info["metadata"] = new_metadata
-        return updated_service_info
-            
